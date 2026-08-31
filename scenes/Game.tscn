@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dh8f32hjbwwq"]
+
+[node name="Game" type="Node3D" unique_id=292603832]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=600598442]
+use_collision = true
+size = Vector3(10, 1, 10)

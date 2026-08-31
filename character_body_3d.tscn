@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dvs4i0pyadolf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=5957660]
+
+[node name="ImporterMeshInstance3D" type="ImporterMeshInstance3D" parent="." unique_id=1659371734]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=503144524]
+shape = SubResource("CapsuleShape3D_g4v7s")
+debug_color = Color(0, 11.708403, 13.469126, 1)
