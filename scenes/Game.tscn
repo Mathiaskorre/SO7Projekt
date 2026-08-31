@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://dh8f32hjbwwq"]
 
+[ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_ibkli"]
+
 [node name="Game" type="Node3D" unique_id=292603832]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=600598442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 use_collision = true
 size = Vector3(10, 1, 10)
+
+[node name="CharacterBody3D" parent="." unique_id=5957660 instance=ExtResource("1_ibkli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
