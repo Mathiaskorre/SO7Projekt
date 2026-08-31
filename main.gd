@@ -11,3 +11,4 @@ func _input(event):
 	if event.is_action_pressed("my_action"):
 		health -= 20
 		print(health)
+		print("Test Test")
