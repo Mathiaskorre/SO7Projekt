@@ -2,7 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_ibkli"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibkli"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qbsmt"]
+sky_material = SubResource("ProceduralSkyMaterial_ibkli")
+
+[sub_resource type="Environment" id="Environment_cpr0p"]
+background_mode = 2
+sky = SubResource("Sky_qbsmt")
+glow_enabled = true
+
 [node name="Game" type="Node3D" unique_id=292603832]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=344503692]
+environment = SubResource("Environment_cpr0p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1347207051]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=600598442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -10,4 +29,4 @@ use_collision = true
 size = Vector3(10, 1, 10)
 
 [node name="CharacterBody3D" parent="." unique_id=5957660 instance=ExtResource("1_ibkli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -1)
