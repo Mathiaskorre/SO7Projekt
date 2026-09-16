@@ -12,4 +12,3 @@ func _input(event):
 		health -= 20
 		print(health)
 		print("Test Test")
-		print("hej med dig")
