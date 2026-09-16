@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dvs4i0pyadolf"]
+
+[ext_resource type="Script" uid="uid://cvl87otdys2ki" path="res://scenes/character_body_3d.gd" id="1_cvunv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=5957660]
+script = ExtResource("1_cvunv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=503144524]
+shape = SubResource("CapsuleShape3D_g4v7s")
+debug_color = Color(0, 11.708403, 13.469126, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=647765515]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=311025002]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1941193389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2290645, 1.1522454)
