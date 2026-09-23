@@ -42,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_qbsmt")
 
-[node name="StartMenu" type="VBoxContainer" parent="Control" unique_id=982184748]
+[node name="MainMenuContainer" type="VBoxContainer" parent="Control" unique_id=982184748]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
