@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dh8f32hjbwwq"]
+
+[ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_p73vr"]
+[ext_resource type="Script" uid="uid://dbfl6xmjhhlcy" path="res://scripts/GameLogic.gd" id="1_t4bxf"]
+[ext_resource type="Script" uid="uid://bx3tm6kfvqaq8" path="res://scripts/GuiControl.gd" id="2_t4bxf"]
+[ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scripts/StartMenuButtons.gd" id="3_p73vr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibkli"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qbsmt"]
+sky_material = SubResource("ProceduralSkyMaterial_ibkli")
+
+[sub_resource type="Environment" id="Environment_cpr0p"]
+background_mode = 2
+sky = SubResource("Sky_qbsmt")
+glow_enabled = true
+
+[node name="GameManger" type="Node" unique_id=1741493948]
+script = ExtResource("1_t4bxf")
+
+[node name="MainGame" type="Node3D" parent="." unique_id=2139220517]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainGame" unique_id=344503692]
+environment = SubResource("Environment_cpr0p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainGame" unique_id=1347207051]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MainGame" unique_id=600598442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+use_collision = true
+size = Vector3(10, 1, 10)
+
+[node name="CharacterBody3D" parent="MainGame" unique_id=5957660 instance=ExtResource("1_p73vr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -1)
+
+[node name="Control" type="Control" parent="." unique_id=634505601]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_t4bxf")
+
+[node name="StartMenu" type="VBoxContainer" parent="Control" unique_id=982184748]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -268.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0204595, 1.6966727)
+alignment = 1
+script = ExtResource("3_p73vr")

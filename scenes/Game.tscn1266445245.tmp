@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dh8f32hjbwwq"]
 
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_ibkli"]
+[ext_resource type="Script" uid="uid://bx3tm6kfvqaq8" path="res://scenes/GuiControl.gd" id="2_qbsmt"]
+[ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scenes/StartMenuButtons.gd" id="3_cpr0p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibkli"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -30,3 +32,25 @@ size = Vector3(10, 1, 10)
 
 [node name="CharacterBody3D" parent="." unique_id=5957660 instance=ExtResource("1_ibkli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -1)
+
+[node name="Control" type="Control" parent="." unique_id=634505601]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_qbsmt")
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="Control" unique_id=982184748]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -268.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0204595, 1.6966727)
+alignment = 1
+script = ExtResource("3_cpr0p")
