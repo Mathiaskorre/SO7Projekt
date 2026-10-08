@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_p73vr"]
 [ext_resource type="Script" uid="uid://dbfl6xmjhhlcy" path="res://scripts/GameLogic.gd" id="1_t4bxf"]
-[ext_resource type="Script" uid="uid://bx3tm6kfvqaq8" path="res://scripts/GuiControl.gd" id="2_t4bxf"]
 [ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scripts/StartMenuButtons.gd" id="3_p73vr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibkli"]
@@ -45,7 +44,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_t4bxf")
 
 [node name="StartMenu" type="VBoxContainer" parent="Control" unique_id=982184748]
 layout_mode = 1
@@ -59,3 +57,28 @@ grow_vertical = 2
 scale = Vector2(1.0204595, 1.6966727)
 alignment = 1
 script = ExtResource("3_p73vr")
+
+[node name="MainGui" type="Container" parent="Control" unique_id=2016952005]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Settings" type="ColorRect" parent="Control" unique_id=1977657052]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Load save" type="ColorRect" parent="Control" unique_id=553324811]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_right = 120.0
+offset_bottom = 40.0
+
+[connection signal="button_signal" from="Control/StartMenu" to="." method="_on_start_menu_button_signal"]

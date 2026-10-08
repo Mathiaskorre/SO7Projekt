@@ -1,11 +1,9 @@
 extends VBoxContainer
 @onready var container = $"."
 signal button_signal(Output)
-var button_names = {1:"Start",2:"Load save",3:"Settings",4:"Quit"}
+var button_names = {1:"Start",2:"Load save",3:"Settings",4:"Quit",5:"Does nothing"}
 func emitter(i):
 	button_signal.emit(i)
-	print(i)
-	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,6 +13,7 @@ func _ready() -> void:
 		button.size.y=60
 		button.position.y =-140
 		button.text = button_names[i+1]
+		button.name = button_names[i+1]
 		button.size_flags_horizontal = container.SIZE_SHRINK_CENTER
 		button.size_flags_vertical = container.SIZE_FILL
 		button.custom_minimum_size.x = 140
