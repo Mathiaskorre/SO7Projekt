@@ -32,7 +32,8 @@ func _physics_process(delta: float) -> void:
 func damage_taken(damage:float) -> void:
 	var hp = player.get_meta("health")
 	if hp <= 0:
-		print("You are dead!")
+		pass
+		#print("You are dead!")
 	else:
 		player.set_meta("health",hp-damage)
-		print(player.get_meta("health"))
+		#print(player.get_meta("health"))
