@@ -10,6 +10,8 @@ func _on_start_menu_button_signal(Output: Variant) -> void:
 		else:
 			Controller_child.visible = true
 	if Controller_child == Controller.get_child(1):
+		$Control/Settings.hide()
+		$"Control/Load save".hide()
 		StartMenu.queue_free()
 		Controller_child.visible = true
 	else:
