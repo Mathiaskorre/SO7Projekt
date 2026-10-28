@@ -7,12 +7,9 @@ extends CharacterBody3D
 @export var max_spring_length: float = 10
 @export var min_spring_length: float = 1
 @export_range(0.0,1.0) var mouse_sensitivity = 0.01
-
-var speed = 5.0
-var jump_velocity = 4.5
-var accelration = 2.0
-
+var double_jump = false
 func _physics_process(delta: float) -> void:
+	
 	#region Movement
 	# Add the gravity.
 	if not is_on_floor():
@@ -20,23 +17,26 @@ func _physics_process(delta: float) -> void:
 		
 	# Handle jump.
 	if Input.is_action_pressed("my_action") and is_on_floor():
-		velocity.y = jump_velocity
+		velocity.y = player.get_meta("jump_velocity")
+		double_jump = true
+	elif Input.is_action_just_pressed("my_action") and double_jump == true:
+		velocity.y = player.get_meta("jump_velocity")
+		double_jump = false
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("a_action", "d_action", "w_action", "s_action")
 	var direction := ((transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()).rotated(Vector3(0,1,0),camera_pivot.rotation.y)
 	
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = direction.x * player.get_meta("speed")
+		velocity.z = direction.z * player.get_meta("speed")
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, player.get_meta("speed"))
+		velocity.z = move_toward(velocity.z, 0, player.get_meta("speed"))
 	move_and_slide()
 	#endregion
 
-	#endregion
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if camera_pivot:
 		camera.look_at(camera_pivot.global_position, Vector3.UP)
 
