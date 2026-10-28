@@ -1,7 +1,7 @@
 extends Container
 @onready var Player = $"../../MainGame/Player"
 
-class Healthbar: #(NOT DONE)
+'class Healthbar: #(NOT DONE)
 	var objecttype: Object
 	var ownership: int
 	var health: float
@@ -18,4 +18,4 @@ func _on_game_manger_main_gui_run() -> void:
 		var healthbar = Healthbar.new()
 		healthbar.height = 10
 	print("test")
-	pass # Replace with function body.
+	pass # Replace with function body.'
