@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_p73vr"]
 [ext_resource type="Script" uid="uid://dbfl6xmjhhlcy" path="res://scripts/GameLogic.gd" id="1_t4bxf"]
 [ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scripts/StartMenuButtons.gd" id="3_p73vr"]
+[ext_resource type="Script" uid="uid://bfqq6od3dviql" path="res://scenes/node_3d.gd" id="4_7fyak"]
+[ext_resource type="PackedScene" uid="uid://drektoqoe32n" path="res://scenes/Sphere.tscn" id="4_fpdtd"]
 [ext_resource type="Script" uid="uid://cuednyg14veq7" path="res://scripts/main_gui.gd" id="4_t4bxf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibkli"]
@@ -16,6 +18,9 @@ sky_material = SubResource("ProceduralSkyMaterial_ibkli")
 background_mode = 2
 sky = SubResource("Sky_qbsmt")
 glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(9.30127, 6.3473816, 9.473145)
 
 [node name="GameManger" type="Node" unique_id=1741493948]
 script = ExtResource("1_t4bxf")
@@ -37,6 +42,19 @@ size = Vector3(10, 1, 10)
 [node name="Player" parent="MainGame" unique_id=5957660 instance=ExtResource("1_p73vr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -1)
 metadata/health = 100.0
+metadata/speed = 5.0
+metadata/jump_velocity = 4.5
+metadata/accelration = 2.0
+
+[node name="Node3D" type="Node3D" parent="MainGame" unique_id=738866843]
+script = ExtResource("4_7fyak")
+orbs = Array[PackedScene]([ExtResource("4_fpdtd")])
+
+[node name="MobTimer" type="Timer" parent="MainGame/Node3D" unique_id=1314652129]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainGame/Node3D" unique_id=2033329397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04272461, 4.32318, -0.7229004)
+shape = SubResource("BoxShape3D_yf5fn")
 
 [node name="Control" type="Control" parent="." unique_id=634505601]
 layout_mode = 3
@@ -85,4 +103,5 @@ offset_right = 120.0
 offset_bottom = 40.0
 
 [connection signal="MainGuiRun" from="." to="Control/MainGui" method="_on_game_manger_main_gui_run"]
+[connection signal="timeout" from="MainGame/Node3D/MobTimer" to="MainGame/Node3D" method="_on_mob_timer_timeout"]
 [connection signal="button_signal" from="Control/StartMenu" to="." method="_on_start_menu_button_signal"]
