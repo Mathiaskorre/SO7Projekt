@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_p73vr"]
 [ext_resource type="Script" uid="uid://dbfl6xmjhhlcy" path="res://scripts/GameLogic.gd" id="1_t4bxf"]
 [ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scripts/StartMenuButtons.gd" id="3_p73vr"]
+[ext_resource type="Script" uid="uid://cuednyg14veq7" path="res://scripts/main_gui.gd" id="4_t4bxf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibkli"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -67,6 +68,7 @@ offset_left = 6.1035156e-05
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("4_t4bxf")
 
 [node name="Settings" type="ColorRect" parent="Control" unique_id=1977657052]
 visible = false
@@ -81,4 +83,5 @@ offset_left = 80.0
 offset_right = 120.0
 offset_bottom = 40.0
 
+[connection signal="MainGuiRun" from="." to="Control/MainGui" method="_on_game_manger_main_gui_run"]
 [connection signal="button_signal" from="Control/StartMenu" to="." method="_on_start_menu_button_signal"]
