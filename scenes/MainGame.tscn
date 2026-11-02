@@ -45,6 +45,7 @@ metadata/health = 100.0
 metadata/speed = 5.0
 metadata/jump_velocity = 4.5
 metadata/accelration = 2.0
+metadata/Max_Health = 100.0
 
 [node name="Node3D" type="Node3D" parent="MainGame" unique_id=738866843]
 script = ExtResource("4_7fyak")
