@@ -8,6 +8,8 @@ extends CharacterBody3D
 @export var min_spring_length: float = 1
 @export_range(0.0,1.0) var mouse_sensitivity = 0.01
 var double_jump = false
+var acceleration = 20
+
 func _physics_process(delta: float) -> void:
 	
 	#region Movement
@@ -26,15 +28,19 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("a_action", "d_action", "w_action", "s_action")
 	var direction := ((transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()).rotated(Vector3(0,1,0),camera_pivot.rotation.y)
-	
+	var target_velocity = direction * player.get_meta("speed")
 	if direction:
 		velocity.x = direction.x * player.get_meta("speed")
 		velocity.z = direction.z * player.get_meta("speed")
 	else:
-		velocity.x = move_toward(velocity.x, 0, player.get_meta("speed"))
-		velocity.z = move_toward(velocity.z, 0, player.get_meta("speed"))
+		velocity.x = move_toward(velocity.x, target_velocity.x, acceleration * delta)
+		velocity.z = move_toward(velocity.z, target_velocity.z, acceleration * delta)	
 	move_and_slide()
 	#endregion
+
+func bounce(x) -> void:
+	velocity.x = move_toward(velocity.x, x*10, acceleration * x)
+	velocity.y = move_toward(velocity.y, x, acceleration * x)
 
 func _process(_delta: float) -> void:
 	if camera_pivot:
