@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://dvs4i0pyadolf"]
 
 [ext_resource type="Script" uid="uid://cvl87otdys2ki" path="res://scripts/character_body_3d.gd" id="1_cvunv"]
+[ext_resource type="Script" uid="uid://3e1i4cvxep4o" path="res://scripts/PlayerCollectionbox.gd" id="2_o7tup"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_57qmd"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=5957660]
 script = ExtResource("1_cvunv")
@@ -29,3 +32,10 @@ top_level = true
 keep_aspect = 0
 current = true
 fov = 90.0
+
+[node name="PlayerCollectionbox" type="Area3D" parent="." unique_id=1624281620]
+script = ExtResource("2_o7tup")
+metadata/_custom_type_script = "uid://3e1i4cvxep4o"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollectionbox" unique_id=1049063837]
+shape = SubResource("CapsuleShape3D_57qmd")

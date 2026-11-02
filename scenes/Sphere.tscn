@@ -1,13 +1,24 @@
 [gd_scene format=3 uid="uid://drektoqoe32n"]
 
+[ext_resource type="Script" uid="uid://btcx5kmbno7ph" path="res://scripts/OrbHitbox.gd" id="1_cnv6o"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_57qmd"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_yf5fn"]
 
-[node name="Area3D" type="Area3D" unique_id=1358584260]
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+
+[node name="Orb3D" type="Area3D" unique_id=1358584260]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=238745613]
 shape = SubResource("SphereShape3D_57qmd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1605259380]
 mesh = SubResource("SphereMesh_yf5fn")
+
+[node name="OrbHitbox" type="Area3D" parent="." unique_id=407732678]
+script = ExtResource("1_cnv6o")
+metadata/_custom_type_script = "uid://btcx5kmbno7ph"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OrbHitbox" unique_id=1947518646]
+shape = SubResource("SphereShape3D_g4v7s")

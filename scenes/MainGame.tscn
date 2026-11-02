@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_p73vr"]
 [ext_resource type="Script" uid="uid://dbfl6xmjhhlcy" path="res://scripts/GameLogic.gd" id="1_t4bxf"]
 [ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scripts/StartMenuButtons.gd" id="3_p73vr"]
-[ext_resource type="Script" uid="uid://bfqq6od3dviql" path="res://scenes/node_3d.gd" id="4_7fyak"]
+[ext_resource type="Script" uid="uid://bfqq6od3dviql" path="res://scripts/node_3d.gd" id="4_7fyak"]
 [ext_resource type="PackedScene" uid="uid://drektoqoe32n" path="res://scenes/Sphere.tscn" id="4_fpdtd"]
 [ext_resource type="Script" uid="uid://cuednyg14veq7" path="res://scripts/main_gui.gd" id="4_t4bxf"]
 
