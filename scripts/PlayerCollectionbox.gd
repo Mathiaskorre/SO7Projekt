@@ -1,6 +1,7 @@
 class_name PlayerCollectionbox
 extends Area3D
 
+@onready var OrbSpawner = $"../../OrbSpawner"
 
 func _init() -> void:
 	collision_layer = 0
@@ -11,6 +12,8 @@ func _ready() -> void:
 	func _on_area_entered(hit_area: OrbHitbox) -> void:
 		if hit_area != null and owner.has_method("bounce"):
 			owner.bounce(hit_area.bounce_val)
-			#hit_area.get_parent().queue_free()
+			owner.orb_jump_reset()
+			hit_area.get_parent().queue_free()
+			OrbSpawner._ready()
 )
 	

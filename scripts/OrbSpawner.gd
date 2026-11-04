@@ -1,27 +1,31 @@
 extends Node3D
 @export var nextWaveTime: float = 0.1
-@export var orbsPerWave: int = 1
-@export var maxWaves := 4
+@export var maxOrbs := 10
 @export var orbs: Array[PackedScene]
 
 @onready var main_game = $".."
 @onready var timer: Timer = $MobTimer
 @onready var collision_shape = $CollisionShape3D
 
-var currentWave = 0
+var currentOrbs = 0
 var randomGenerator = RandomNumberGenerator.new()
+
+const orbsPerWave: int = 1
 
 func _ready() -> void:
 	timer.wait_time = nextWaveTime
 	timer.start()
 
 func _on_mob_timer_timeout() -> void:
+	if get_tree().current_scene.get_child_count() - 2 < maxOrbs and currentOrbs == maxOrbs:
+		currentOrbs -= 1
+		timer.start()
 	for i in orbsPerWave:
-		var randomOrbsNode=orbs.pick_random().instantiate()
-		get_tree().current_scene.add_child(randomOrbsNode)
-		randomOrbsNode.global_position = _get_random_point()
-	currentWave += 1
-	if currentWave == maxWaves:
+		var OrbsNode=orbs[0].instantiate()
+		get_tree().current_scene.add_child(OrbsNode)
+		OrbsNode.global_position = _get_random_point()
+	currentOrbs += 1
+	if currentOrbs == maxOrbs:
 		timer.stop()
 func _get_random_point():
 	var Shape: BoxShape3D = collision_shape.shape
