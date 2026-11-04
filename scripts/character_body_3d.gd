@@ -3,27 +3,52 @@ extends CharacterBody3D
 @onready var camera := $Camer/SpringArm3D/Camera3D as Camera3D
 @onready var camera_pivot := $Camer as Node3D 
 @onready var spring_arm:= $Camer/SpringArm3D as SpringArm3D
+@onready var timer: Timer = $Timer
 @export var tilt_limit = deg_to_rad(75)
 @export var max_spring_length: float = 10
 @export var min_spring_length: float = 1
 @export_range(0.0,1.0) var mouse_sensitivity = 0.01
-var double_jump = false
+
+var double_jump = true
 var acceleration = 20
+var coyoteTime = 1
+var timeIsNotPassed = true
+var coyoteTimeStart = true 
+
+func _ready() -> void:
+	timer.wait_time = coyoteTime
+
+func _on_timer_timeout() -> void:
+	timeIsNotPassed = false
+	timer.stop()
+
+func orb_jump_reset() -> void:
+	double_jump = true
+	coyoteTimeStart = true
 
 func _physics_process(delta: float) -> void:
-	
 	#region Movement
 	# Add the gravity.
+	if not is_on_floor() and double_jump == true and coyoteTimeStart:
+		coyoteTimeStart = false
+		timeIsNotPassed = true
+		timer.start()
+	elif is_on_floor():
+		coyoteTimeStart = true
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
-	# Handle jump.
+
 	if Input.is_action_pressed("my_action") and is_on_floor():
 		velocity.y = player.get_meta("jump_velocity")
-		double_jump = true
-	elif Input.is_action_just_pressed("my_action") and double_jump == true:
+		coyoteTimeStart = false
+	if Input.is_action_just_pressed("my_action") and double_jump == true and not is_on_floor() and timeIsNotPassed:
 		velocity.y = player.get_meta("jump_velocity")
 		double_jump = false
+	elif is_on_floor():
+		double_jump = true
+		timeIsNotPassed = true
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("a_action", "d_action", "w_action", "s_action")
@@ -39,8 +64,8 @@ func _physics_process(delta: float) -> void:
 	#endregion
 
 func bounce(x) -> void:
-	velocity.x = move_toward(velocity.x, x*10, acceleration * x)
-	velocity.y = move_toward(velocity.y, x, acceleration * x)
+	velocity.x = move_toward(velocity.x, 0, acceleration * x)
+	velocity.y = move_toward(velocity.y, x/4, acceleration * x)
 
 func _process(_delta: float) -> void:
 	if camera_pivot:

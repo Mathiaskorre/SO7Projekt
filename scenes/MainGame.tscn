@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dvs4i0pyadolf" path="res://scenes/character_body_3d.tscn" id="1_p73vr"]
 [ext_resource type="Script" uid="uid://dbfl6xmjhhlcy" path="res://scripts/GameLogic.gd" id="1_t4bxf"]
 [ext_resource type="Script" uid="uid://bsamgn5a4vwup" path="res://scripts/StartMenuButtons.gd" id="3_p73vr"]
-[ext_resource type="Script" uid="uid://bfqq6od3dviql" path="res://scripts/node_3d.gd" id="4_7fyak"]
+[ext_resource type="Script" uid="uid://bfqq6od3dviql" path="res://scripts/OrbSpawner.gd" id="4_7fyak"]
 [ext_resource type="PackedScene" uid="uid://drektoqoe32n" path="res://scenes/Sphere.tscn" id="4_fpdtd"]
 [ext_resource type="Script" uid="uid://cuednyg14veq7" path="res://scripts/main_gui.gd" id="4_t4bxf"]
 
@@ -47,13 +47,15 @@ metadata/jump_velocity = 4.5
 metadata/accelration = 2.0
 metadata/Max_Health = 100.0
 
-[node name="Node3D" type="Node3D" parent="MainGame" unique_id=738866843]
+[node name="Timer" type="Timer" parent="MainGame/Player" unique_id=416590857]
+
+[node name="OrbSpawner" type="Node3D" parent="MainGame" unique_id=738866843]
 script = ExtResource("4_7fyak")
 orbs = Array[PackedScene]([ExtResource("4_fpdtd")])
 
-[node name="MobTimer" type="Timer" parent="MainGame/Node3D" unique_id=1314652129]
+[node name="MobTimer" type="Timer" parent="MainGame/OrbSpawner" unique_id=1314652129]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MainGame/Node3D" unique_id=2033329397]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainGame/OrbSpawner" unique_id=2033329397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04272461, 4.32318, -0.7229004)
 shape = SubResource("BoxShape3D_yf5fn")
 
@@ -103,5 +105,6 @@ offset_right = 120.0
 offset_bottom = 40.0
 
 [connection signal="MainGuiRun" from="." to="Control/MainGui" method="_on_game_manger_main_gui_run"]
-[connection signal="timeout" from="MainGame/Node3D/MobTimer" to="MainGame/Node3D" method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="MainGame/Player/Timer" to="MainGame/Player" method="_on_timer_timeout"]
+[connection signal="timeout" from="MainGame/OrbSpawner/MobTimer" to="MainGame/OrbSpawner" method="_on_mob_timer_timeout"]
 [connection signal="button_signal" from="Control/StartMenu" to="." method="_on_start_menu_button_signal"]
