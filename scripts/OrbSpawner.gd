@@ -1,6 +1,6 @@
 extends Node3D
-@export var nextWaveTime: float = 0.1
-@export var maxOrbs := 10
+@export var nextWaveTime: float = 0.01
+@export var maxOrbs :int = 10
 @export var orbs: Array[PackedScene]
 
 @onready var main_game = $".."

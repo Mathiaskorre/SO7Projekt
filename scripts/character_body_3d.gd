@@ -6,14 +6,16 @@ extends CharacterBody3D
 @onready var timer: Timer = $Timer
 @export var tilt_limit = deg_to_rad(75)
 @export var max_spring_length: float = 10
-@export var min_spring_length: float = 1
+@export var min_spring_length: float = 0.01
+@export var spring_length_step: float = 1
 @export_range(0.0,1.0) var mouse_sensitivity = 0.01
 
 var double_jump = true
 var acceleration = 20
-var coyoteTime = 1
+var coyoteTime = 0.5
 var timeIsNotPassed = true
 var coyoteTimeStart = true 
+var FirstPersonActive = false
 
 func _ready() -> void:
 	timer.wait_time = coyoteTime
@@ -73,21 +75,34 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	#region Camera control
-	if event is InputEventMouseMotion and Input.is_action_pressed("m2_action"):
+	if FirstPersonActive:
+		if event is InputEventMouseMotion:
+			camera_pivot.rotation.x -= event.screen_relative.y * mouse_sensitivity
+			camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, -tilt_limit, tilt_limit)
+			camera_pivot.rotation.y -= event.screen_relative.x * mouse_sensitivity
+	elif event is InputEventMouseMotion and Input.is_action_pressed("m2_action"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		camera_pivot.rotation.x -= event.screen_relative.y * mouse_sensitivity
 		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, -tilt_limit, tilt_limit)
 		camera_pivot.rotation.y -= event.screen_relative.x * mouse_sensitivity
 	if Input.is_action_just_released("m2_action"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
-		if spring_arm.spring_length != max_spring_length:
-			spring_arm.spring_length += 1
+		if spring_arm.spring_length <= max_spring_length:
+			FirstPersonActive = false
+			spring_arm.spring_length += spring_length_step
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
-		if spring_arm.spring_length != min_spring_length:
-			spring_arm.spring_length -= 1
+		if spring_arm.spring_length >= min_spring_length:
+			spring_arm.spring_length -= spring_length_step
+			FirstPersonActive = false
 		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			FirstPersonActive = true
+		if spring_arm.spring_length <= min_spring_length or spring_arm.spring_length <= min_spring_length + spring_length_step:
+			spring_arm.spring_length = min_spring_length
+			FirstPersonActive = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 #endregion
 
